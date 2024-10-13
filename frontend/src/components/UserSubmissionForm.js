@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import './UserSubmissionForm.css';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 
 function UserSubmissionForm() {
   const [name, setName] = useState("");
   const [socialHandle, setSocialHandle] = useState("");
   const [images, setImages] = useState([]);
+  const [imageNames, setImageNames] = useState([]); // To store image names
 
   const handleImageUpload = (e) => {
-    setImages([...e.target.files]);
+    const selectedImages = Array.from(e.target.files); // Convert FileList to array
+    setImages(prevImages => [...prevImages, ...selectedImages]); // Append new images
+
+    const selectedImageNames = selectedImages.map(file => file.name);
+    setImageNames(prevNames => [...prevNames, ...selectedImageNames]); // Append new image names
   };
 
   const handleSubmit = async (e) => {
@@ -16,6 +22,8 @@ function UserSubmissionForm() {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("socialHandle", socialHandle);
+
+    // Append each image to formData
     images.forEach((image) => {
       formData.append("images", image);
     });
@@ -32,14 +40,13 @@ function UserSubmissionForm() {
 
       const data = await response.json();
       alert("Submission Successful!");
-      console.log(data); // Optional: log response data
+      console.log(data);
 
     } catch (error) {
       console.error("Error during submission:", error);
       alert("Submission failed! Please try again.");
     }
   };
-
 
   return (
     <motion.div
@@ -70,6 +77,17 @@ function UserSubmissionForm() {
           className="file-input"
           onChange={handleImageUpload}
         />
+        <div className="image-names">
+          {imageNames.length > 0 ? (
+            <ul>
+              {imageNames.map((imageName, index) => (
+                <li key={index}>{imageName}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No images selected yet.</p>
+          )}
+        </div>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -78,6 +96,9 @@ function UserSubmissionForm() {
         >
           Submit
         </motion.button>
+        <p className="admin-login">
+          If you are an admin, please <Link to="/admin/login">login to Dashboard</Link>.
+        </p>
       </form>
     </motion.div>
   );
