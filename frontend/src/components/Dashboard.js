@@ -10,7 +10,7 @@ function Dashboard() {
 
   useEffect(() => {
     // Fetch user submissions from the backend
-    fetch("http://localhost:5000/api/admin/dashboard")
+    fetch("https://socialmedia-details-3w.vercel.app/api/admin/dashboard")
       .then((res) => {
         if (!res.ok) {
           return res.text().then((text) => {
