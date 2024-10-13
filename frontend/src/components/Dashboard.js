@@ -64,7 +64,7 @@ function Dashboard() {
               return (
                 <div key={idx} className="image-card">
                   <img
-                    src={`https://threew-assignment-task-1.onrender.com/${image}`}
+                    src={`https://threew-assignment-task-1.onrender.com/uploads/${image}`}
                     alt={`User upload ${idx}`}
                     className="uploaded-image"
                   />
