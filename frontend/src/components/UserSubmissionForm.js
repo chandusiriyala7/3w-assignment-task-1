@@ -29,7 +29,7 @@ function UserSubmissionForm() {
     });
 
     try {
-      const response = await fetch("https://socialmedia-details-3w.vercel.app/api/users/submit", {
+      const response = await fetch("https://threew-assignment-task-1.onrender.com/api/users/submit", {
         method: "POST",
         body: formData,
       });
@@ -44,7 +44,7 @@ function UserSubmissionForm() {
 
     } catch (error) {
       console.error("Error during submission:", error);
-       
+      alert("Submission failed! Please try again.");
     }
   };
 

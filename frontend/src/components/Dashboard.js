@@ -10,7 +10,7 @@ function Dashboard() {
 
   useEffect(() => {
     // Fetch user submissions from the backend
-    fetch("https://socialmedia-details-3w.vercel.app/api/admin/dashboard")
+    fetch("https://threew-assignment-task-1.onrender.com/api/admin/dashboard")
       .then((res) => {
         if (!res.ok) {
           return res.text().then((text) => {
@@ -64,7 +64,7 @@ function Dashboard() {
               return (
                 <div key={idx} className="image-card">
                   <img
-                    src={`http://localhost:5000/${image}`}
+                    src={`https://threew-assignment-task-1.onrender.com/${image}`}
                     alt={`User upload ${idx}`}
                     className="uploaded-image"
                   />
